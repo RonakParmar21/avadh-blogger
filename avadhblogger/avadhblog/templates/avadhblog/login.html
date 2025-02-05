@@ -1,0 +1,13 @@
+
+{% if message %}
+    <script>
+        alert("{{message}}")
+    </script>
+{% endif %}
+
+<form method="POST" action="{% url "adminlogin" %}">
+    {% csrf_token %}
+    <input type="email" name='adminemail' id='adminemail' placeholder="Enter email" required />
+    <input type='password' name='adminpassword' id='adminpassword' placeholder="Enter password" required />
+    <input type='submit' value="Login" />
+</form>

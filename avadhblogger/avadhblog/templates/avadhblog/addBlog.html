@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static "avadhblog/css/style.css" %}" />
+</head>
+<body>
+
+    <script>
+        {% if success %}
+            alert("Product added successfully!");
+        {% endif %}
+    </script>
+    
+    {% include "avadhblog/navbar.html" %}
+
+        <form method="POST" action="{% url "addblog" %}" class="form-container" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <h1>Add Blog</h1>
+        </div>
+        <div class="input-container">
+            <label id="image">Choose Image</label>
+            <input type="file" name='image' id='image' required />
+        </div>
+        <div class="input-container">
+            <label id="description">Description</label>
+            <textarea name='description' row=10 id='description' required></textarea>
+        </div>
+
+        <input type="submit" value="Add Blog" />
+    </form>
+    <a href="{% url "viewblog" %}">View Blogs</a>
+</body>
+</html>

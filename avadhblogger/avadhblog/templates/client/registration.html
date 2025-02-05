@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Avadh Blog</title>
+    <link rel="stylesheet" href="{% static "client/css/main.css" %}" />
+</head>
+<body>
+    {% if message %}
+        <script>alert("{{ message }}")</script>
+    {% endif %}
+    {% include "client/navbar.html" %}
+
+    <div class="container"> 
+        <form method="POST" {% url "registration" %} class="form-container">
+            {% csrf_token %}
+            <div>
+                <h1>Registration</h1>
+            </div>
+            <div class="input-container">
+                <label id="name">Name</label>
+                <input type="text" name="name" id="name" placeholder="Enter name" required />
+            </div>
+            <div class="input-container">
+                <label id="email">Email</label>
+                <input type="text" id="email" name="email" placeholder="Enter email" required />
+            </div>
+            <div class="input-container">
+                <label id="mobile">Mobile</label>
+                <input type="tel" id="mobile" name="mobile" placeholder="Enter mobile no." required />
+            </div>
+
+            <div class="input-container">
+                <label id="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" required />
+            </div>
+
+            <div class="input-container">
+                <label id="cpassword">Confirm Password</label>
+                <input type="password" id="cpassword" name="cpassword" placeholder="Re-Enter password" required />
+            </div>
+
+            <input type="submit" value="Register" />
+            <a href="{% url "login" %}">already registered?</a>
+        </form>
+    </div>
+    
+    {% include "client/footer.html" %}
+
+    <script src="{% static "client/js/vendor/jquery.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "client/js/vendor/popper.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "client/js/vendor/bootstrap.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "client/js/functions.js" %}" type="text/javascript"></script>
+</body>
+</html>
