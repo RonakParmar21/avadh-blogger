@@ -3,32 +3,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Blog</title>
 </head>
 <body>
+  {% include "avadhblog/navbar.html" %}
+  <h2>Update Blog</h2>
 
-    {% include "avadhblog/navbar.html" %}
+  {% if error %}
+    <p style="color: red;">{{ error }}</p>
+  {% else %}
+    <form method="POST" action="{% url 'update_blog' blog.id %}" enctype="multipart/form-data" style="margin-top:200px; padding: 200px">
+      {% csrf_token %}
+      <label>Details:</label>
+      <input type="text" name="details" value="{{ blog.details }}" required>
 
-    <h2>Update Blog</h2>
+      <label>Image:</label>
+      <input type="file" name="image">
+      
+      {% if blog.images %}
+        <img src="{{ blog.images }}" alt="Current Image" width="100" height="100">
+      {% endif %}
 
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% else %}
-        <form method="POST" action="{% url "update_blog" %}" enctype="multipart/form-data" style="margin-top:200px"> 
-            {% csrf_token %}
-            <label>Details:</label>
-            <input type="text" name="details" value="{{ blog.details }}" required>
-
-            <label>Image URL:</label>
-            <input type="file" name="image" value="{{ blog.images }}" required>
-
-            <img src="{{blog.images}}" />
-
-            <button type="submit">Update</button>
-        </form>
-    {% endif %}
-
+      <button type="submit">Update</button>
+    </form>
+  {% endif %}
 </body>
 </html>
